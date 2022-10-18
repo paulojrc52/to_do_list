@@ -126,14 +126,13 @@
                     this.getStoraged()      
                 }   
                 } else {
-                   ''
                     toast.classList.add('visible')
 
                     setTimeout(function(){
                         toast.classList.remove('visible')
                     }, 5000)
                 }
-                evento.target.value = 
+                evento.target.value = ''
 
             }
             
