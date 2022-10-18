@@ -106,7 +106,7 @@
 
                 if(length < 10){
                     tasks = this.tasks
-                    evento.target.value = ''
+                    
                 
                     const savedTasks = localStorage.getItem('tasks')
                     const savedTasksObj = JSON.parse(savedTasks)
@@ -126,14 +126,14 @@
                     this.getStoraged()      
                 }   
                 } else {
-                    evento.target.value = ''
+                   ''
                     toast.classList.add('visible')
 
                     setTimeout(function(){
                         toast.classList.remove('visible')
                     }, 5000)
                 }
-                console.log(length) 
+                evento.target.value = 
 
             }
             
