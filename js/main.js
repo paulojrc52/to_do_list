@@ -20,6 +20,7 @@
         this.$list = document.querySelector('#list')
         this.$removeButtons = document.querySelectorAll('.remove')
         this.$removeAllButton = document.querySelector('#removeAll')
+        this.$toast = document.querySelector('.toast')
     },
     
 
@@ -98,26 +99,41 @@
             const value = evento.target.value
             let obj 
             
+            const length = this.tasks.length
+            
+            const toast = this.$toast
             if (key === 'Enter') {
 
-                evento.target.value = ''
+                if(length < 10){
+                    tasks = this.tasks
+                    evento.target.value = ''
                 
-                const savedTasks = localStorage.getItem('tasks')
-                const savedTasksObj = JSON.parse(savedTasks)
+                    const savedTasks = localStorage.getItem('tasks')
+                    const savedTasksObj = JSON.parse(savedTasks)
 
-                if(!savedTasksObj) {
-                    obj = [
-                        {task: value, done: false}
+                    if(!savedTasksObj) {
+                        obj = [
+                            {task: value, done: false}
+                        ]
+                    } else {
+                        obj = [
+                            {task: value, done: false},
+                            ...savedTasksObj
                     ]
+                    this.$list.innerHTML += this.getTaskHtml(obj)
+                    localStorage.setItem('tasks', JSON.stringify(obj))
+                    
+                    this.getStoraged()      
+                }   
                 } else {
-                    obj = [
-                        {task: value, done: false},
-                        ...savedTasksObj
-                   ]
+                    toast.classList.add('visible')
+
+                    setTimeout(function(){
+                        toast.classList.remove('visible')
+                    }, 5000)
                 }
-                this.$list.innerHTML += this.getTaskHtml(obj)
-                localStorage.setItem('tasks', JSON.stringify(obj))
-                this.getStoraged()
+                console.log(length) 
+
             }
             
         },
