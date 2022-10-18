@@ -126,6 +126,7 @@
                     this.getStoraged()      
                 }   
                 } else {
+                    evento.target.value = ''
                     toast.classList.add('visible')
 
                     setTimeout(function(){
